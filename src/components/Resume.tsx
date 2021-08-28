@@ -8,6 +8,7 @@ import {
   StyleSheet,
 } from '@react-pdf/renderer'
 import { colors } from '../utils/variables'
+import { IResumeFields } from './types'
 
 Font.register({
   family: 'Poppins',
@@ -53,7 +54,7 @@ const styles = StyleSheet.create({
     textTransform: 'uppercase',
     fontSize: '14pt',
     letterSpacing: '2pt',
-    color: colors.lighterDark,
+    color: colors.dark2,
     margin: 0,
     padding: 0,
     lineHeight: '1.2pt',
@@ -66,14 +67,20 @@ const styles = StyleSheet.create({
   },
 })
 
-const Resume = () => {
+interface IResume {
+  resumeFields: IResumeFields | null
+}
+
+const Resume = ({ resumeFields }: IResume) => {
   return (
     <Document>
       <Page size='A4' style={styles.page}>
         <View style={styles.headerSection}>
-          <Text style={styles.header1}>Deniz Abdurrahmani</Text>
-          <Text style={styles.header2}>Software Developer</Text>
-          <Text style={styles.paragraph}>me@deniz.tech | +358 123456789</Text>
+          <Text style={styles.header1}>{resumeFields?.fullName}</Text>
+          <Text style={styles.header2}>{resumeFields?.title}</Text>
+          <Text style={styles.paragraph}>
+            {resumeFields?.phoneNumber} | {resumeFields?.email}
+          </Text>
         </View>
         <View>
           <Text style={styles.paragraph}>Summary</Text>
