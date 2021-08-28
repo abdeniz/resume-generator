@@ -15,8 +15,6 @@ interface IDownloadButton {
 const DownloadButton = ({ resumeFields, children }: IDownloadButton) => {
   const [filled, setFilled] = useState(false)
 
-  console.log(filled)
-
   useEffect(() => {
     for (const property in resumeFields) {
       if (resumeFields[property as keyof IResumeFields]) {
