@@ -1,28 +1,14 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import { colors } from '../utils/variables'
 import DownloadButton from './DownloadButton'
 import Input from './Input'
-import { IResumeFields } from './types'
 
-interface IMain {
-  setResumeFields: (resumeFields: IResumeFields) => void
-}
-
-const Main = ({ setResumeFields }: IMain) => {
+const Main = () => {
   const [fullName, setFullName] = useState<string>('')
   const [title, setTitle] = useState<string>('')
   const [email, setEmail] = useState<string>('')
   const [phoneNumber, setPhoneNumber] = useState<string>('')
-
-  useEffect(() => {
-    setResumeFields({
-      fullName: fullName,
-      title: title,
-      email: email,
-      phoneNumber: phoneNumber,
-    })
-  }, [fullName, title, email, phoneNumber, setResumeFields])
 
   return (
     <MainWrapper>

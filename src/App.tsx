@@ -1,26 +1,15 @@
-import React, { useState } from 'react'
-import { PDFViewer } from '@react-pdf/renderer'
-import Resume from './components/Resume'
+import React from 'react'
 import { createGlobalStyle } from 'styled-components'
 import './reset.css'
 import { colors } from './utils/variables'
 import Main from './components/Main'
-import { IResumeFields } from './components/types'
-import DownloadButton from './components/DownloadButton'
 
 function App() {
-  const [resumeFields, setresumeFields] = useState<IResumeFields>({
-    fullName: '',
-    title: '',
-    email: '',
-    phoneNumber: '',
-  })
-
   return (
     <div className='App'>
       <GlobalStyles />
 
-      <Main setResumeFields={setresumeFields} />
+      <Main />
     </div>
   )
 }
