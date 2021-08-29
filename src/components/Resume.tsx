@@ -6,6 +6,7 @@ import {
   Font,
   StyleSheet,
 } from '@react-pdf/renderer'
+import { format } from 'date-fns'
 import { colors } from '../utils/variables'
 import { IResumeFields } from './types'
 
@@ -50,21 +51,19 @@ const styles = StyleSheet.create({
 
   header2: {
     fontFamily: 'Poppins',
-    textTransform: 'uppercase',
     fontSize: '14pt',
+    fontWeight: 'medium',
+    textTransform: 'uppercase',
     letterSpacing: '2pt',
     color: colors.dark,
     margin: 0,
     padding: 0,
-    lineHeight: '1.2pt',
   },
 
   header3: {
     fontFamily: 'Poppins',
     fontSize: '14pt',
     fontWeight: 'medium',
-    textTransform: 'uppercase',
-    letterSpacing: '2pt',
     color: colors.dark,
     margin: 0,
     padding: 0,
@@ -76,10 +75,20 @@ const styles = StyleSheet.create({
     color: colors.dark,
   },
 
-  summary: {
+  section: {
     paddingVertical: '16pt',
     width: '80vw',
     borderBottom: `1px solid ${colors.dark}`,
+  },
+
+  experienceSection: {
+    paddingVertical: '8pt',
+  },
+
+  date: {
+    fontFamily: 'Poppins',
+    fontSize: '14pt',
+    color: colors.darkerLight2,
   },
 })
 
@@ -98,9 +107,37 @@ const Resume = ({ resumeFields }: IResume) => {
             {resumeFields?.phoneNumber} | {resumeFields?.email}
           </Text>
         </View>
-        <View style={styles.summary}>
-          <Text style={styles.header3}>Profile summary</Text>
+        <View style={styles.section}>
+          <Text style={styles.header2}>Profile summary</Text>
           <Text style={styles.paragraph}>{resumeFields?.summary}</Text>
+        </View>
+        <View style={styles.section}>
+          <Text style={styles.header2}>Experience</Text>
+          {resumeFields &&
+            resumeFields.experience.map(
+              (
+                { jobTitle, employer, startDate, endDate, city, description },
+                index
+              ) => {
+                return (
+                  <View style={styles.experienceSection} key={index}>
+                    <Text style={styles.header3}>
+                      {jobTitle}, {employer}
+                    </Text>
+                    <Text style={styles.date}>
+                      {startDate && format(startDate, 'MMM, y')} -{' '}
+                      {endDate &&
+                      format(endDate, 'MMM, y') ===
+                        format(new Date(Date.now()), 'MMM, y')
+                        ? 'Present'
+                        : endDate && format(endDate, 'MMM, y')}
+                      , {city}
+                    </Text>
+                    <Text style={styles.paragraph}>{description}</Text>
+                  </View>
+                )
+              }
+            )}
         </View>
       </Page>
     </Document>

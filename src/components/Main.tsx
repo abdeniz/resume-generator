@@ -1,12 +1,13 @@
-// import { PDFViewer } from '@react-pdf/renderer'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { colors } from '../utils/variables'
 import DownloadButton from './DownloadButton'
 import Input from './Input'
-// import Resume from './Resume'
+import { PDFViewer } from '@react-pdf/renderer'
+import Resume from './Resume'
 import Textarea from './Textarea'
-import { IResumeFields } from './types'
+import { IExperienceFields, IResumeFields } from './types'
+import Experience from './Experience'
 
 const Main = () => {
   const [fullName, setFullName] = useState<string>('')
@@ -14,6 +15,7 @@ const Main = () => {
   const [email, setEmail] = useState<string>('')
   const [phoneNumber, setPhoneNumber] = useState<string>('')
   const [summary, setSummary] = useState<string>('')
+  const [experience, setExperience] = useState<IExperienceFields[] | []>([])
 
   const [resume, setResume] = useState<IResumeFields | null>(null)
 
@@ -24,8 +26,13 @@ const Main = () => {
       email: email,
       phoneNumber: phoneNumber,
       summary: summary,
+      experience: experience,
     })
   }, [fullName, title, email, phoneNumber, summary])
+
+  const handleExperiences = useCallback((newExperience) => {
+    setExperience([newExperience])
+  }, [])
 
   return (
     <>
@@ -37,9 +44,11 @@ const Main = () => {
             email: email,
             phoneNumber: phoneNumber,
             summary: summary,
+            experience: experience,
           }}
         />
       </PDFViewer> */}
+
       <MainWrapper>
         <MainContent>
           <Logo>Resume Generator</Logo>
@@ -47,13 +56,18 @@ const Main = () => {
           <SectionHeader>Profile</SectionHeader>
           <ProfileWrapper>
             <Input label='Full name' setState={setFullName} />
-            <Input label='Title' setState={setTitle} />
+            <Input label='Job title' setState={setTitle} />
             <Input label='Email' setState={setEmail} />
             <Input label='Phone number' setState={setPhoneNumber} />
             <Textarea label='Profile summary' setState={setSummary} />
           </ProfileWrapper>
+
+          <SectionHeader>Experience</SectionHeader>
+          <ExperienceWrapper>
+            <Experience handleExperiences={handleExperiences} />
+          </ExperienceWrapper>
         </MainContent>
-        <DownloadButton resumeFields={resume}>Download PDF</DownloadButton>
+        {/* <DownloadButton resumeFields={resume}>Download PDF</DownloadButton> */}
       </MainWrapper>
     </>
   )
@@ -83,12 +97,17 @@ const ProfileWrapper = styled.div`
   justify-content: space-between;
 `
 
+const ExperienceWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`
+
 const Logo = styled.h1`
   margin-bottom: 64px;
 `
 
 const SectionHeader = styled.h2`
-  margin-bottom: 8px;
+  margin-top: 32px;
   text-align: center;
 `
 

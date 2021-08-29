@@ -16,7 +16,6 @@
     "jsx": "react-jsx",
     "sourceMap": true,
     "declaration": true,
-    "noUnusedParameters": true,
     "incremental": true,
     "noFallthroughCasesInSwitch": true
   },
