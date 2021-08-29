@@ -3,8 +3,8 @@ import styled from 'styled-components'
 import { colors } from '../utils/variables'
 import DownloadButton from './DownloadButton'
 import Input from './Input'
-import { PDFViewer } from '@react-pdf/renderer'
-import Resume from './Resume'
+// import { PDFViewer } from '@react-pdf/renderer'
+// import Resume from './Resume'
 import Textarea from './Textarea'
 import { IExperienceFields, IResumeFields } from './types'
 import Experience from './Experience'
@@ -15,7 +15,7 @@ const Main = () => {
   const [email, setEmail] = useState<string>('')
   const [phoneNumber, setPhoneNumber] = useState<string>('')
   const [summary, setSummary] = useState<string>('')
-  const [experience, setExperience] = useState<IExperienceFields[] | []>([])
+  const [experiences, setExperiences] = useState<IExperienceFields[] | []>([])
 
   const [resume, setResume] = useState<IResumeFields | null>(null)
 
@@ -26,27 +26,18 @@ const Main = () => {
       email: email,
       phoneNumber: phoneNumber,
       summary: summary,
-      experience: experience,
+      experience: experiences,
     })
-  }, [fullName, title, email, phoneNumber, summary])
+  }, [fullName, title, email, phoneNumber, summary, experiences])
 
   const handleExperiences = useCallback((newExperience) => {
-    setExperience([newExperience])
+    setExperiences([newExperience])
   }, [])
 
   return (
     <>
       {/* <PDFViewer style={{ width: '100vw', height: '100vh' }}>
-        <Resume
-          resumeFields={{
-            fullName: fullName,
-            title: title,
-            email: email,
-            phoneNumber: phoneNumber,
-            summary: summary,
-            experience: experience,
-          }}
-        />
+        <Resume resumeFields={resume} />
       </PDFViewer> */}
 
       <MainWrapper>
@@ -67,7 +58,7 @@ const Main = () => {
             <Experience handleExperiences={handleExperiences} />
           </ExperienceWrapper>
         </MainContent>
-        {/* <DownloadButton resumeFields={resume}>Download PDF</DownloadButton> */}
+        <DownloadButton resumeFields={resume}>Download PDF</DownloadButton>
       </MainWrapper>
     </>
   )
