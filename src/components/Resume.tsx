@@ -1,4 +1,3 @@
-import React from 'react'
 import {
   Document,
   Page,
@@ -41,7 +40,7 @@ const styles = StyleSheet.create({
 
   header1: {
     fontFamily: 'Poppins',
-    fontSize: '22pt',
+    fontSize: '18pt',
     fontWeight: 'semibold',
     color: colors.dark,
     margin: 0,
@@ -54,16 +53,33 @@ const styles = StyleSheet.create({
     textTransform: 'uppercase',
     fontSize: '14pt',
     letterSpacing: '2pt',
-    color: colors.dark2,
+    color: colors.dark,
     margin: 0,
     padding: 0,
     lineHeight: '1.2pt',
   },
 
-  paragraph: {
+  header3: {
+    fontFamily: 'Poppins',
     fontSize: '14pt',
+    fontWeight: 'medium',
+    textTransform: 'uppercase',
+    letterSpacing: '2pt',
+    color: colors.dark,
+    margin: 0,
+    padding: 0,
+  },
+
+  paragraph: {
+    fontSize: '12pt',
     fontFamily: 'Poppins',
     color: colors.dark,
+  },
+
+  summary: {
+    paddingVertical: '16pt',
+    width: '80vw',
+    borderBottom: `1px solid ${colors.dark}`,
   },
 })
 
@@ -82,8 +98,9 @@ const Resume = ({ resumeFields }: IResume) => {
             {resumeFields?.phoneNumber} | {resumeFields?.email}
           </Text>
         </View>
-        <View>
-          <Text style={styles.paragraph}>Summary</Text>
+        <View style={styles.summary}>
+          <Text style={styles.header3}>Profile summary</Text>
+          <Text style={styles.paragraph}>{resumeFields?.summary}</Text>
         </View>
       </Page>
     </Document>

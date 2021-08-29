@@ -3,4 +3,5 @@ export interface IResumeFields {
   title: string
   email: string
   phoneNumber: string
+  summary: string
 }

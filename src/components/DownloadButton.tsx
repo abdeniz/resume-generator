@@ -1,5 +1,5 @@
 import { pdf } from '@react-pdf/renderer'
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import styled from 'styled-components'
 import Resume from './Resume'
 import { IResumeFields } from './types'

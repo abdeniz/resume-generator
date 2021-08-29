@@ -1,34 +1,37 @@
 import styled from 'styled-components'
 import { colors } from '../utils/variables'
 
-interface IInput {
+interface ITextarea {
   label: string
   setState: (value: string) => void
 }
 
-const Input = ({ label, setState }: IInput) => {
+const Textarea = ({ label, setState }: ITextarea) => {
   return (
-    <InputWrapper>
+    <TextareaWrapper>
       <Label>{label}</Label>
-      <StyledInput onChange={(e) => setState(e.target.value)} />
-    </InputWrapper>
+      <StyledTextarea onChange={(e) => setState(e.target.value)} />
+    </TextareaWrapper>
   )
 }
 
-const InputWrapper = styled.div`
+const TextareaWrapper = styled.div`
   padding: 16px 0;
+  width: 100%;
 `
 
-const StyledInput = styled.input`
+const StyledTextarea = styled.textarea`
   padding: 16px;
-  width: 300px;
   border-radius: 4px;
+  width: 100%;
+  height: 150px;
   border: none;
   background-color: ${colors.light};
   color: ${colors.dark};
   font-size: 16px;
   transition: border 0.2s;
   border-bottom: 2px solid transparent;
+  resize: none;
 
   &:hover {
     border-bottom: 2px solid ${colors.light2};
@@ -45,4 +48,4 @@ const Label = styled.p`
   padding: 8px;
 `
 
-export default Input
+export default Textarea
