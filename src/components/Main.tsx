@@ -1,11 +1,12 @@
 import { PDFViewer } from '@react-pdf/renderer'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { colors } from '../utils/variables'
 import DownloadButton from './DownloadButton'
 import Input from './Input'
 import Resume from './Resume'
 import Textarea from './Textarea'
+import { IResumeFields } from './types'
 
 const Main = () => {
   const [fullName, setFullName] = useState<string>('')
@@ -13,6 +14,18 @@ const Main = () => {
   const [email, setEmail] = useState<string>('')
   const [phoneNumber, setPhoneNumber] = useState<string>('')
   const [summary, setSummary] = useState<string>('')
+
+  const [resume, setResume] = useState<IResumeFields | null>(null)
+
+  useEffect(() => {
+    setResume({
+      fullName: fullName,
+      title: title,
+      email: email,
+      phoneNumber: phoneNumber,
+      summary: summary,
+    })
+  }, [fullName, title, email, phoneNumber, summary])
 
   return (
     <>
@@ -29,26 +42,18 @@ const Main = () => {
       </PDFViewer> */}
       <MainWrapper>
         <MainContent>
-          <Header>Resume Generator</Header>
-          <InputWrapper>
+          <Logo>Resume Generator</Logo>
+
+          <SectionHeader>Profile</SectionHeader>
+          <ProfileWrapper>
             <Input label='Full name' setState={setFullName} />
             <Input label='Title' setState={setTitle} />
             <Input label='Email' setState={setEmail} />
             <Input label='Phone number' setState={setPhoneNumber} />
             <Textarea label='Profile summary' setState={setSummary} />
-          </InputWrapper>
+          </ProfileWrapper>
         </MainContent>
-        <DownloadButton
-          resumeFields={{
-            fullName: fullName,
-            title: title,
-            email: email,
-            phoneNumber: phoneNumber,
-            summary: summary,
-          }}
-        >
-          Download PDF
-        </DownloadButton>
+        <DownloadButton resumeFields={resume}>Download PDF</DownloadButton>
       </MainWrapper>
     </>
   )
@@ -72,14 +77,19 @@ const MainWrapper = styled.div`
 
 const MainContent = styled.div``
 
-const InputWrapper = styled.div`
+const ProfileWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: space-between;
 `
 
-const Header = styled.h1`
-  margin-bottom: 16px;
+const Logo = styled.h1`
+  margin-bottom: 64px;
+`
+
+const SectionHeader = styled.h2`
+  margin-bottom: 8px;
+  text-align: center;
 `
 
 export default Main

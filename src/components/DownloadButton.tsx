@@ -8,7 +8,7 @@ import { colors } from '../utils/variables'
 import { useState } from 'react'
 
 interface IDownloadButton {
-  resumeFields: IResumeFields
+  resumeFields: IResumeFields | null
   children: string
 }
 

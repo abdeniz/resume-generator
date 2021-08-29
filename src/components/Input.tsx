@@ -4,24 +4,30 @@ import { colors } from '../utils/variables'
 interface IInput {
   label: string
   setState: (value: string) => void
+  fullWidth?: boolean
 }
 
-const Input = ({ label, setState }: IInput) => {
+const Input = ({ label, setState, fullWidth }: IInput) => {
   return (
-    <InputWrapper>
+    <InputWrapper fullWidth={fullWidth}>
       <Label>{label}</Label>
       <StyledInput onChange={(e) => setState(e.target.value)} />
     </InputWrapper>
   )
 }
 
-const InputWrapper = styled.div`
+const InputWrapper = styled.div<{ fullWidth?: boolean }>`
   padding: 16px 0;
+  width: ${({ fullWidth }) => (fullWidth ? '100%' : '49%')};
+
+  @media only screen and (max-width: 800px) {
+    width: 100%;
+  }
 `
 
 const StyledInput = styled.input`
   padding: 16px;
-  width: 300px;
+  width: 100%;
   border-radius: 4px;
   border: none;
   background-color: ${colors.light};

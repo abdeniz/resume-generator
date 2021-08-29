@@ -47,8 +47,8 @@ const GlobalStyles = createGlobalStyle`
     font-family: 'Poppins', sans-serif;
     box-sizing: inherit;
     background-color: ${colors.light2};
-    /* width: 100vw;
-    height: 100vh; */
+    width: 100vw;
+    height: 100vh;
 
     display: flex;
     justify-content: center;
@@ -66,6 +66,11 @@ const GlobalStyles = createGlobalStyle`
     color: ${colors.dark2};
   }
 
+  h2 {
+    font-size: 20px;
+    font-weight: 500;
+    color: ${colors.dark2};
+  }
 `
 
 export default App
