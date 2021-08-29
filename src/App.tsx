@@ -100,6 +100,60 @@ const GlobalStyles = createGlobalStyle`
       width: 100%;
     }
   } 
+
+  .react-datepicker {
+    & button > span::before {
+      border-color: ${colors.dark};
+      transition: border-color .2s;
+    }
+
+    & button:hover > span::before {
+      border-color: ${colors.light};
+    }
+
+    border-radius: 0;
+    border-color: transparent;
+    background-color: transparent;    
+
+    &__triangle::before {
+      display: none;
+    }
+  }
+
+  .react-datepicker__month-container {
+    background-color: ${colors.light};
+    border-radius: 4px;
+    
+    & * {
+      transition: all .2s;
+    }
+  }
+
+  .react-datepicker__header, .react-datepicker-year-header {
+    background-color: ${colors.primary};
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    color: ${colors.dark2};
+    padding: 10px;
+    border: none;
+  }
+
+  .react-datepicker__month-text, .react-datepicker__month--selected {
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    padding: 10px 5px;
+    
+
+    &--keyboard-selected {
+      background-color: ${colors.primary};
+      color: ${colors.dark};
+
+      &:hover {
+        background-color: ${colors.white};
+      }
+    }
+  }
 `
 
 export default App
