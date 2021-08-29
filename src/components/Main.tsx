@@ -1,10 +1,10 @@
-import { PDFViewer } from '@react-pdf/renderer'
+// import { PDFViewer } from '@react-pdf/renderer'
 import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { colors } from '../utils/variables'
 import DownloadButton from './DownloadButton'
 import Input from './Input'
-import Resume from './Resume'
+// import Resume from './Resume'
 import Textarea from './Textarea'
 import { IResumeFields } from './types'
 
